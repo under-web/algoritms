@@ -1,5 +1,5 @@
 def binary_search(s_list, item):
-    """Бинарный поиск по отсортированному списку"""
+    """Бинарный поиск по отсортированному списку O(log n)"""
     low = 0
     high = len(s_list) - 1
     while low <= high:
@@ -15,7 +15,7 @@ def binary_search(s_list, item):
 
 
 def find_smallest(arr):
-    """Функция поискаа наименьшего элемента массива"""
+    """Функция поиска наименьшего элемента массива"""
     smalllest = arr[0]
     smalllest_index = 0
     for i in range(1, len(arr)):
@@ -24,13 +24,26 @@ def find_smallest(arr):
             smalllest_index = i
     return smalllest_index
 
+
 def selection_sort(arr):
-    """Функция сортировки выбором"""
+    """Функция сортировки выбором O(n**2)"""
     new_arr = []
     for i in range(len(arr)):
         smallest = find_smallest(arr)
         new_arr.append(arr.pop(smallest))
     return new_arr
+
+
+def quick_sort(array):
+    """Функция быстрой сортировки O(n log n)"""
+    if len(array) < 2:
+        return array
+    else:
+        pivot = array[0]
+        less = [i for i in array[1:] if i <= pivot]
+        greater = [i for i in array[1:] if i > pivot]
+
+        return quick_sort(less) + [pivot] + quick_sort(greater)
 
 
 if __name__ == '__main__':
@@ -40,4 +53,4 @@ if __name__ == '__main__':
     # h = list(set(target_list))
     # h.sort()
     # print('Позиция в списке {}'.format(binary_search(h, 79271201015)))
-    print(selection_sort(spisok))
+    print(quick_sort(spisok))
