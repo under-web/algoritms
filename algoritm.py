@@ -1,3 +1,5 @@
+from collections import deque
+
 def binary_search(s_list, item):
     """Бинарный поиск по отсортированному списку O(log n)"""
     low = 0
@@ -45,6 +47,28 @@ def quick_sort(array):
 
         return quick_sort(less) + [pivot] + quick_sort(greater)
 
+def person_is_seller(name):
+    return name[-1] == 'm'
+
+def algo_graphs(name):
+    """ Функция реализующая графы"""
+
+    graph ={}
+    search_queue = deque()
+    search_queue += graph[name]
+    searcher = []
+    while search_queue:
+        person = search_queue.popleft()
+        if not person in searcher:
+            if person_is_seller(person):
+                print(person + ' is a mango seller')
+                return True
+            else:
+                search_queue += graph[person]
+                searcher.append(person)
+    return False
+
+
 
 if __name__ == '__main__':
     spisok = [3, 3, 45, 6, 67, 8, 4, 34, 23, 6, 6, 7, 8]
@@ -53,4 +77,4 @@ if __name__ == '__main__':
     # h = list(set(target_list))
     # h.sort()
     # print('Позиция в списке {}'.format(binary_search(h, 79271201015)))
-    print(quick_sort(spisok))
+    # print(quick_sort(spisok))
